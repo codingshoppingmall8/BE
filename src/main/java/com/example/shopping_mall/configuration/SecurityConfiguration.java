@@ -69,7 +69,6 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/api/member/**").permitAll()
                 .antMatchers("/api/post/**").permitAll()
-                .antMatchers("/api/comment/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -88,7 +87,7 @@ public class SecurityConfiguration {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.addExposedHeader("Authorization");
-        configuration.addExposedHeader("Refresh-Token");
+        configuration.addExposedHeader("RefreshToken");
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
