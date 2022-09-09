@@ -1,29 +1,32 @@
 package com.example.shopping_mall.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
+import javax.validation.constraints.*;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class MemberRequestDto {
-    private Long id;
-
+    @NotEmpty
+    @Email
     private String email;
 
+    @NotEmpty
     private String password;
 
+    @NotEmpty
     private String passwordConfirm;
 
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String address;
 
+    @NotEmpty
     private int phone;
 }
