@@ -1,11 +1,16 @@
 package com.example.shopping_mall.service;
 
+import com.example.shopping_mall.Entity.Category;
 import com.example.shopping_mall.Entity.Post;
 import com.example.shopping_mall.repository.PostRepository;
 import com.example.shopping_mall.request.RequestPostDto;
 import com.example.shopping_mall.response.ResponseDto;
 import com.example.shopping_mall.response.ResponsePostDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,27 +23,60 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostService {
     private  final PostRepository postRepository;
-
-
     @Transactional
-    public ResponseDto<?> getPostList(Long id) {
-        Post post = isPresentPost(id);
-        postRepository.delete(post);
-        return ResponseDto.success("Success");
-
+    public ResponseDto<?> getAllPost(int page) { //전체 리스트를 return
+        Pageable pageable = PageRequest.of(page-1,30,Sort.by("createdAt").descending());//기본값으로 최신순으로 정렬됨
+        Page<Post> posts = postRepository.findAll(pageable);
+        return ResponseDto.success(posts);
     }
+    @Transactional
+    public ResponseDto<?> allPostSort(int page,int method) { //전체 리스트 정렬 할때 .
+        Pageable pageable;
+        if(method ==1){
+             pageable = PageRequest.of(page-1,30,Sort.by("cnt"));
+        }
+        else if(method ==2){
+             pageable = PageRequest.of(page-1,30,Sort.by("cost"));
+        }
+        else if(method ==3){
+             pageable = PageRequest.of(page-1,30,Sort.by("cost").descending());
+        }
+        else
+            pageable = PageRequest.of(page-1,30,Sort.by("title"));
+        Page<Post> posts = postRepository.findAll(pageable);//전체를 그냥 조회 할 때
+        return ResponseDto.success(posts);
+    }
+    @Transactional
+    public ResponseDto<?> getPostByCategory(int page, int cate_num) { //전체 리스트를 return
+        Pageable pageable = PageRequest.of(page-1,30,Sort.by("createdAt").descending());//기본값
+        Page<Post> posts;
+        Category[] categories =Category.values();
+        posts = postRepository.findByCategory(pageable,categories[cate_num]);
+        return ResponseDto.success(posts);
+    }
+    @Transactional
+    public ResponseDto<?> sortPostsByCategory(int page,int cate_num,int method){
+        Pageable pageable;
+        if(method == 1){
+            pageable = PageRequest.of(page-1,30,Sort.by("cnt"));
+        }
+        else if(method ==2){
+            pageable = PageRequest.of(page-1,30,Sort.by("cost"));
+        }
+        else if(method ==3){
+            pageable = PageRequest.of(page-1,30,Sort.by("cost").descending());
+        }
+        else
+            pageable = PageRequest.of(page-1,30,Sort.by("title"));
+        Page<Post> posts;
 
+        Category[] categories =Category.values();
+            posts = postRepository.findByCategory(pageable,categories[cate_num]);
+
+        return ResponseDto.success(posts);
+    }
     @Transactional
     public ResponseDto<?> createPost(RequestPostDto  requestPostDto) {
-//        if (null == request.getHeader("Refresh-Token")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
-//
-//        if (null == request.getHeader("Authorization")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
         Post post = Post.builder()
                 .imgUrl(requestPostDto.getImgUrl())
                 .title(requestPostDto.getTitle())
