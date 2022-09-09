@@ -27,6 +27,6 @@ public class MemberRequestDto {
     @NotEmpty
     private String address;
 
-    @NotEmpty
-    private int phone;
+    @NotNull
+    private Integer phone;
 }
