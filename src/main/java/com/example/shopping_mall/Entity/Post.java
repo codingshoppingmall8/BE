@@ -36,7 +36,7 @@ public class Post {
     @Column
     private int cnt;//조회수를 더하기 위한 field
     @Column
-    private String category;
+    private Category category;
     @CreationTimestamp
     @Column
     private LocalDateTime createdAt = LocalDateTime.now();
