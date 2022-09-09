@@ -1,5 +1,6 @@
 package com.example.shopping_mall.request;
 
+import com.example.shopping_mall.Entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,5 @@ public class RequestPostDto {
     private String manual;//상세 정보
     private int  cost;//point
     private int  point;//point
-    private String category;
+    private Category category;
 }
