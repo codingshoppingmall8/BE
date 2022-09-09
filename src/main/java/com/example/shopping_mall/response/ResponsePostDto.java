@@ -1,6 +1,7 @@
 package com.example.shopping_mall.response;
 
 
+import com.example.shopping_mall.Entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +19,5 @@ public class ResponsePostDto {
     private int  cnt;//point
     private int  cost;//point
     private int  point;//point
-    private String category;
+    private Category category;
 }
