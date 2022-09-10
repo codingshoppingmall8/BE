@@ -21,6 +21,11 @@ public class MemberController {
         return memberService.createMember(requestDto);
     }
 
+    @DeleteMapping(value = "/api/member/{id}")
+    public ResponseDto<?> deleteMember(@PathVariable("id") Long id) {
+        return memberService.deleteMember(id);
+    }
+
     @PostMapping(value = "/api/member/login")
     public ResponseDto<?> login(@RequestBody @Valid LoginRequestDto requestDto, HttpServletResponse response) {
         return memberService.login(requestDto, response);
