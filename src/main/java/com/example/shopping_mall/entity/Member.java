@@ -41,7 +41,7 @@ public class Member extends Timestamped {
     @Column(nullable = false)
     private int phone;
 
-    @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="member", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Cart> carts;
     public void setName(String name){
         this.name = name;

@@ -85,7 +85,7 @@ public class MemberService {
         );
     }
 
-//  @Transactional
+    //  @Transactional
 //  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
 //    if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
 //      return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
@@ -108,6 +108,12 @@ public class MemberService {
 //    tokenToHeaders(tokenDto, response);
 //    return ResponseDto.success("success");
 //  }
+    public ResponseDto<?> deleteMember(Long id) {
+        System.out.println(id);
+        memberRepository.deleteById(id);
+
+        return ResponseDto.success("왜 안되");
+    }
 
     public ResponseDto<?> logout(HttpServletRequest request) {
         if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
