@@ -16,7 +16,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private Member member;
+    private com.example.shopping_mall.entity.Member member;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
