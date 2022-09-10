@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +22,10 @@ public class CartController {
     @GetMapping(value = "api/member/cart")
     public ResponseDto<?> getAllCarts(HttpServletRequest request) {
         return cartService.getAllCart(request);
+    }
+
+    @DeleteMapping(value = "api/member/cart")
+    public ResponseDto<?> removeCarts(HttpServletRequest request,@RequestBody List<Integer>chbox) {
+        return cartService.removeCart(request,chbox);
     }
 }
