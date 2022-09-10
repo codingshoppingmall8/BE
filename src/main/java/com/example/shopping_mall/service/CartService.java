@@ -60,6 +60,15 @@ public class CartService {
         }
         return ResponseDto.success(responseCartDtoList);
     }
+
+    @Transactional
+    public ResponseDto<?> removeCart(HttpServletRequest request,List<Integer>chbox) { //chbox에서는 제거될 cart들의 id를 지칭함
+        for(Integer temp : chbox){
+            Long idx = Long.valueOf(temp);
+            cartRepository.deleteById(idx);
+        }
+        return ResponseDto.success("SUCCESS");
+    }
     @Transactional(readOnly = true)//post를 찾아서 거기서 build를 하고 저장을 하는거임!
     public Post isPresentPost(Long id) {
 
