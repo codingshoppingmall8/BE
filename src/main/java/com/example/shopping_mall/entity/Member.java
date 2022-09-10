@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -38,8 +41,8 @@ public class Member extends Timestamped {
     @Column(nullable = false)
     private int phone;
 
-
-
+    @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carts;
     public void setName(String name){
         this.name = name;
     }
@@ -64,4 +67,6 @@ public class Member extends Timestamped {
     public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
         return passwordEncoder.matches(password, this.password);
     }
+
+
 }

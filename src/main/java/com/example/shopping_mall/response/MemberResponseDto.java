@@ -12,11 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MemberResponseDto {
     private Long id;
-
     private String email;
-
     private String name;
-
     private int phone;
 
 }

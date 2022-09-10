@@ -1,7 +1,7 @@
 package com.example.shopping_mall.response;
 
 
-import com.example.shopping_mall.Entity.Category;
+import com.example.shopping_mall.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

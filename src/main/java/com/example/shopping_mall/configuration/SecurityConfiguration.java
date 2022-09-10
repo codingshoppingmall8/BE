@@ -54,13 +54,10 @@ public class SecurityConfiguration {
         http
                 .httpBasic().disable()
                 .cors().configurationSource(corsConfigurationSource());
-
         http.csrf().disable()
-
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPointException)
                 .accessDeniedHandler(accessDeniedHandlerException)
-
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -69,6 +66,9 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/api/member/**").permitAll()
                 .antMatchers("/api/post/**").permitAll()
+                .antMatchers("/api/sort_post/**").permitAll()
+                .antMatchers("/api/post_category/**").permitAll()
+                .antMatchers("/api/sort_category/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

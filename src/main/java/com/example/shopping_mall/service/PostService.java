@@ -1,7 +1,7 @@
 package com.example.shopping_mall.service;
 
-import com.example.shopping_mall.Entity.Category;
-import com.example.shopping_mall.Entity.Post;
+import com.example.shopping_mall.entity.Category;
+import com.example.shopping_mall.entity.Post;
 import com.example.shopping_mall.repository.PostRepository;
 import com.example.shopping_mall.request.RequestPostDto;
 import com.example.shopping_mall.response.ResponseDto;
@@ -14,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 
@@ -117,18 +115,10 @@ public class PostService {
         );
 
     }
-
-
     @Transactional(readOnly = true)
     public Post isPresentPost(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         return optionalPost.orElse(null);
     }
-
-
-
-
-
-
 
 }

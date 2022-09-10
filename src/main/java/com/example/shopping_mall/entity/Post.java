@@ -1,4 +1,4 @@
-package com.example.shopping_mall.Entity;
+package com.example.shopping_mall.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Builder
@@ -44,8 +43,6 @@ public class Post {
     @UpdateTimestamp
     @Column
     private LocalDateTime updatedAt = LocalDateTime.now();
-
-
     public void add_cnt(){
         this.cnt++;
     }

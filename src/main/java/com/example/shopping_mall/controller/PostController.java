@@ -1,14 +1,11 @@
 package com.example.shopping_mall.controller;
 
 
-import com.example.shopping_mall.Entity.Category;
 import com.example.shopping_mall.request.RequestPostDto;
 import com.example.shopping_mall.response.ResponseDto;
 import com.example.shopping_mall.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api")

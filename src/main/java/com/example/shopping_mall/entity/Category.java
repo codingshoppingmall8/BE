@@ -1,4 +1,4 @@
-package com.example.shopping_mall.Entity;
+package com.example.shopping_mall.entity;
 
 public enum Category {
     BAG,ACC,STATIONERY,DIGITAL,DOLL,HOME;

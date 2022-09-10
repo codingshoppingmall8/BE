@@ -1,6 +1,6 @@
 package com.example.shopping_mall.request;
 
-import com.example.shopping_mall.Entity.Category;
+import com.example.shopping_mall.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
