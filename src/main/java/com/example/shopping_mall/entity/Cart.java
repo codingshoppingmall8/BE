@@ -1,10 +1,7 @@
-package com.example.shopping_mall.Entity;
+package com.example.shopping_mall.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,8 +10,10 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity
 public class Cart {
     @Id
@@ -29,9 +28,11 @@ public class Cart {
     private String desc;
     @Column
     private int cost;
-    @JoinColumn(name = "post_id", nullable = false)
+
+
+    @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Post post;
+    private Member member;
 
 
     @CreationTimestamp
