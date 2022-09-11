@@ -21,9 +21,9 @@ public class MemberController {
         return memberService.createMember(requestDto);
     }
 
-    @DeleteMapping(value = "/api/member/{id}")
-    public ResponseDto<?> deleteMember(@PathVariable("id") Long id) {
-        return memberService.deleteMember(id);
+    @DeleteMapping(value = "/api/member")
+    public ResponseDto<?> deleteMember(HttpServletRequest request) {
+        return memberService.deleteMember(request);
     }
 
     @PostMapping(value = "/api/member/login")

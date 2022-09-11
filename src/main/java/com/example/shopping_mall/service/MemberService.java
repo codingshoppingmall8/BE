@@ -108,10 +108,9 @@ public class MemberService {
 //    tokenToHeaders(tokenDto, response);
 //    return ResponseDto.success("success");
 //  }
-    public ResponseDto<?> deleteMember(Long id) {
-        System.out.println(id);
-        memberRepository.deleteById(id);
-
+    public ResponseDto<?> deleteMember(HttpServletRequest request) {
+        Member member = validateMember(request);
+        memberRepository.delete(member);
         return ResponseDto.success("왜 안되");
     }
 
@@ -142,7 +141,7 @@ public class MemberService {
 
     @Transactional
     public Member validateMember(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.validateToken(request.getHeader("RefreshToken"))) {
             return null;
         }
         return tokenProvider.getMemberFromAuthentication();

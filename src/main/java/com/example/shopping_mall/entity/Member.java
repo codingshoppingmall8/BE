@@ -20,7 +20,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 public class Member extends Timestamped {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,8 +40,11 @@ public class Member extends Timestamped {
     @Column(nullable = false)
     private int phone;
 
-    @OneToMany(mappedBy="member", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carts;
+
+    @OneToOne(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private RefreshToken refreshToken;
     public void setName(String name){
         this.name = name;
     }
