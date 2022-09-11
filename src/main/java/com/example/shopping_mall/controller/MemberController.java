@@ -4,6 +4,8 @@ import com.example.shopping_mall.request.LoginRequestDto;
 import com.example.shopping_mall.request.MemberRequestDto;
 import com.example.shopping_mall.response.ResponseDto;
 import com.example.shopping_mall.service.MemberService;
+import com.example.shopping_mall.service.KakaoLoginService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import javax.validation.Valid;
 @RestController
 public class MemberController {
     private final MemberService memberService;
+    private final KakaoLoginService kakaoLoginService;
 
     @PostMapping(value = "/api/member/signup")
     public ResponseDto<?> signup(@RequestBody @Valid MemberRequestDto requestDto) {
@@ -29,6 +32,11 @@ public class MemberController {
     @PostMapping(value = "/api/member/login")
     public ResponseDto<?> login(@RequestBody @Valid LoginRequestDto requestDto, HttpServletResponse response) {
         return memberService.login(requestDto, response);
+    }
+
+    @GetMapping(value = "/api/member/kakao")
+    public ResponseDto<?> kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+        return kakaoLoginService.kakaoLogin(code, response);
     }
 
     @PostMapping(value = "/api/auth/member/logout")

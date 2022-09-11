@@ -34,10 +34,10 @@ public class Member extends Timestamped {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column()
     private String address;
 
-    @Column(nullable = false)
+    @Column()
     private int phone;
 
     @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
