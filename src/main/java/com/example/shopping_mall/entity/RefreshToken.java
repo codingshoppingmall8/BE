@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class RefreshToken extends Timestamped {
 
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JoinColumn(name = "member_id", nullable = false)
