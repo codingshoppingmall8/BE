@@ -1,5 +1,6 @@
 package com.example.shopping_mall.entity;
 
+import com.example.shopping_mall.request.MemberRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -45,10 +45,12 @@ public class Member extends Timestamped {
 
     @OneToOne(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private RefreshToken refreshToken;
-    public void setName(String name){
-        this.name = name;
-    }
 
+    public void update(MemberRequestDto requestDto){
+        this.name = requestDto.getName();
+        this.address = requestDto.getAddress();
+        this.phone = requestDto.getPhone();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
