@@ -43,4 +43,15 @@ public class MemberController {
     public ResponseDto<?> logout(HttpServletRequest request) {
         return memberService.logout(request);
     }
+
+    @GetMapping(value = "api/member/mypage")
+    public ResponseDto<?> getMyPage(HttpServletRequest request){
+        return memberService.getMyPage(request);
+    }
+
+    @PostMapping(value = "api/member/mypage")
+    public ResponseDto<?> updateMyPage(MemberRequestDto requestDto, HttpServletRequest request){
+        return memberService.updateMyPage(requestDto, request);
+    }
+
 }
