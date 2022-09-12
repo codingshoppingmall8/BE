@@ -34,6 +34,7 @@ public class CartService {
         }
         Cart cart = Cart.builder()
                 .member(member)
+                .brand(post.getBrand())
                 .imgUrl(post.getImgUrl())
                 .title(post.getTitle())
                 .cost(post.getCost())
@@ -55,6 +56,7 @@ public class CartService {
             responseCartDtoList.add(
                     ResponseCartDto.builder()
                             .id(temp.getId())
+                            .brand(temp.getBrand())
                             .imgUrl(temp.getImgUrl())
                             .title(temp.getTitle())
                             .cost(temp.getCost())

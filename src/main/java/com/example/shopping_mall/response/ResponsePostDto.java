@@ -17,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResponsePostDto {
     private Long  id;
     private String imgUrl;
+    private String brand;
     private String title;
     private int  cost;
     public Page<ResponsePostDto> toDtoList(Page<Post> postList){
         Page<ResponsePostDto> ResponsePostList = postList.map(m -> ResponsePostDto.builder()
                 .id(m.getId())
+                .brand(m.getBrand())
                 .imgUrl(m.getImgUrl())
                 .title(m.getTitle())
                 .cost(m.getCost())

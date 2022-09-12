@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class ResponseCartDto {
 
     private Long id;
+    private String brand;
     private String imgUrl;
     private String title;
     private int cost;

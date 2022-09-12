@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponsePostDto2 {
     private String imgUrl;
+    private String brand;
     private String title;
     private String desc;//설명
     private int  cost;//가격 주문

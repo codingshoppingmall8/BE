@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MyPageRequestDto {
-
     private String name;
-
     private String address;
-
     private String phone;
 }

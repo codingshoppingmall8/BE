@@ -22,6 +22,8 @@ public class Cart {
     private Long id;
 
     @Column
+    private String brand;
+    @Column
     private String imgUrl;
 
     @Column
