@@ -20,20 +20,19 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
     @Column
     private String imgUrl;
+
     @Column
     private String title;
-    @Column
-    private String desc;
+
     @Column
     private int cost;
-
 
     @JoinColumn(name = "member_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
-
 
     @CreationTimestamp
     @Column
