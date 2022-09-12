@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
-
 public class RequestCartDto {
     private String imgUrl;
     private String title;

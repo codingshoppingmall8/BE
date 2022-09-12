@@ -10,13 +10,18 @@ import com.example.shopping_mall.response.MemberResponseDto;
 import com.example.shopping_mall.response.MyPageResponseDto;
 import com.example.shopping_mall.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Target;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
 @Service
@@ -27,18 +32,41 @@ public class MemberService {
     //  private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider tokenProvider;
 
+
+    @Transactional
+    public ResponseDto findAllEmail(){
+        List<String> emailList = new ArrayList<>();
+        List<Member> memberList = memberRepository.findAll();
+        for(Member temp:memberList){
+            emailList.add(temp.getEmail());
+        }
+        return ResponseDto.success(emailList);
+    }
+
     @Transactional
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
         if (null != isPresentMember(requestDto.getEmail())) {
             return ResponseDto.fail("DUPLICATED_NICKNAME",
-                    "중복된 ID 입니다.");
+                    "중복된 EMAIL 입니다.");
         }
 
+        if (!isPassword((requestDto.getPassword()))) {
+            return ResponseDto.fail("Password_NOT_MATCHED_RULE",
+                    "비밀번호 입력 형식이 잘못되었습니다.(영문+숫자 4~12자리)");
+        }
         if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
             return ResponseDto.fail("PASSWORDS_NOT_MATCHED",
                     "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
 
+        if(!isEmail(requestDto.getEmail())){
+            return ResponseDto.fail("Email_NOT_MATCHED_RULE",
+                    "이메일 입력 형식이 잘못되었습니다.");
+        }
+        if(!isPhoneNumber(requestDto.getPhone())){
+            return ResponseDto.fail("PHONE_NUMBER_NOT_MATCHED_RULE",
+                    "전화번호 입력 형식이 잘못되었습니다.(숫자 11자리)");
+        }
         Member member = Member.builder()
                 .email(requestDto.getEmail())
                 .password(requestDto.getPassword())
@@ -52,7 +80,6 @@ public class MemberService {
         return ResponseDto.success(
                 MemberResponseDto.builder()
                         .id(member.getId())
-                        .email(member.getEmail())
                         .name(member.getName())
                         .build()
         );
@@ -80,7 +107,6 @@ public class MemberService {
         return ResponseDto.success(
                 MemberResponseDto.builder()
                         .id(member.getId())
-                        .email(member.getEmail())
                         .name(member.getName())
                         .build()
         );
@@ -199,6 +225,32 @@ public class MemberService {
             return null;
         }
         return tokenProvider.getMemberFromAuthentication();
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isEmail(String email){
+        String regx = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regx);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isPhoneNumber(String number){
+        if(number.length()!=11)
+            return false;
+        Pattern pattern = Pattern.compile("^[0-9]*$");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isPassword(String password){
+        Pattern pattern = Pattern.compile("^.*(?=^.{4,12}$)(?=.*\\d)(?=.*[a-zA-Z]).*$");
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
     }
 
 }

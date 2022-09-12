@@ -24,6 +24,11 @@ public class MemberController {
         return memberService.createMember(requestDto);
     }
 
+    @GetMapping(value = "/api/member/signup")
+    public ResponseDto<?> signup() {
+        return memberService.findAllEmail();
+    }
+
     @DeleteMapping(value = "/api/member")
     public ResponseDto<?> deleteMember(HttpServletRequest request) {
         return memberService.deleteMember(request);
