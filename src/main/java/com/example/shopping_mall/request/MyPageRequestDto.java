@@ -15,5 +15,5 @@ public class MyPageRequestDto {
 
     private String address;
 
-    private Integer phone;
+    private String phone;
 }

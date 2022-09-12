@@ -17,5 +17,5 @@ public class MyPageResponseDto {
 
     private String address;
 
-    private Integer phone;
+    private String phone;
 }
