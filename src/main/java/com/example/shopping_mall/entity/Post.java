@@ -19,16 +19,15 @@ import java.time.LocalDateTime;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
+
+
     @Column
     private String imgUrl;
     @Column
     private String title;
     @Column
     private String desc;
-    @Column
-    private String manual;
     @Column
     private int cost;
     @Column
@@ -46,7 +45,4 @@ public class Post {
     public void add_cnt(){
         this.cnt++;
     }
-
-
-
 }
