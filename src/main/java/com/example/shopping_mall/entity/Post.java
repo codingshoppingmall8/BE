@@ -27,7 +27,7 @@ public class Post {
     @Column
     private String title;
     @Column
-    private String desc;
+    private String desc;//상품의 크기나 소재가 저장되는 필드
     @Column
     private int cost;
     @Column
