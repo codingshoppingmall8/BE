@@ -27,8 +27,11 @@ public class CartService {
 
     @Transactional
     public ResponseDto<?> addCart(Long id, HttpServletRequest request) { //전체 리스트를 return// token이 있으면 그냥 member가 할당이 되는데 아니면,, 흑흑
-        Post post = isPresentPost(id);//로그인되면 그냥 가능한디....
+        Post post = isPresentPost(id);//로그인되면 그냥 가능한디.
         Member member = validateMember(request);
+        if(member==null){
+            return ResponseDto.fail("Login is required","로그인이 필요합니다.");
+        }
         Cart cart = Cart.builder()
                 .member(member)
                 .imgUrl(post.getImgUrl())
@@ -43,8 +46,8 @@ public class CartService {
     @Transactional
     public ResponseDto<?> getAllCart(HttpServletRequest request) {
         Member member = validateMember(request);
-        if(member.equals(null)){
-            ResponseDto.fail("Login is required","로그인이 필요합니다.");
+        if(member==null){
+            return ResponseDto.fail("Login is required","로그인이 필요합니다.");
         }
         List<Cart> cartList = cartRepository.findAllByMember(member);//가져와서
         List<ResponseCartDto>responseCartDtoList = new ArrayList<>();
@@ -64,8 +67,8 @@ public class CartService {
     @Transactional
     public ResponseDto<?> removeCart(HttpServletRequest request,List<Integer>chbox) { //chbox에서는 제거될 cart들의 id를 지칭함
         Member member = validateMember(request);
-        if(member.equals(null)){
-            ResponseDto.fail("Login is required","로그인이 필요합니다.");
+        if(member==null){
+           return ResponseDto.fail("Login is required","로그인이 필요합니다.");
         }
         for(Integer temp : chbox){
             Long idx = Long.valueOf(temp);
