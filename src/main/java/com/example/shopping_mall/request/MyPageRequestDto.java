@@ -1,18 +1,19 @@
-package com.example.shopping_mall.response;
+package com.example.shopping_mall.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberResponseDto {
-    private Long id;
-    private String email;
+public class MyPageRequestDto {
+
     private String name;
 
+    private String address;
+
+    private Integer phone;
 }

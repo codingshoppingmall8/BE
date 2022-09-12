@@ -7,6 +7,7 @@ import com.example.shopping_mall.request.LoginRequestDto;
 import com.example.shopping_mall.request.MemberRequestDto;
 import com.example.shopping_mall.request.TokenDto;
 import com.example.shopping_mall.response.MemberResponseDto;
+import com.example.shopping_mall.response.MyPageResponseDto;
 import com.example.shopping_mall.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -125,6 +126,59 @@ public class MemberService {
         }
 
         return tokenProvider.deleteRefreshToken(member);
+    }
+
+    public ResponseDto<?> getMyPage(HttpServletRequest request){
+        if (null == request.getHeader("RefreshToken")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND",
+                    "로그인이 필요합니다.");
+        }
+
+        if (null == request.getHeader("Authorization")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND",
+                    "로그인이 필요합니다.");
+        }
+
+        Member member = validateMember(request);
+        if (null == member) {
+            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+        }
+
+        return ResponseDto.success(
+                MyPageResponseDto.builder()
+                        .email(member.getEmail())
+                        .name(member.getName())
+                        .address(member.getAddress())
+                        .phone(member.getPhone())
+                        .build()
+        );
+    }
+
+    public ResponseDto<?> updateMyPage(MemberRequestDto requestDto, HttpServletRequest request){
+        if (null == request.getHeader("RefreshToken")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND",
+                    "로그인이 필요합니다.");
+        }
+
+        if (null == request.getHeader("Authorization")) {
+            return ResponseDto.fail("MEMBER_NOT_FOUND",
+                    "로그인이 필요합니다.");
+        }
+
+        Member member = validateMember(request);
+        if (null == member) {
+            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
+        }
+        memberRepository.findByEmail(member.getEmail()).get().update(requestDto);
+
+        return ResponseDto.success(
+                MyPageResponseDto.builder()
+                        .email(member.getEmail())
+                        .name(requestDto.getName())
+                        .address(requestDto.getAddress())
+                        .phone(requestDto.getPhone())
+                        .build()
+        );
     }
 
     @Transactional(readOnly = true)
