@@ -15,7 +15,6 @@ public class ResponseCartDto {
     private Long id;
     private String imgUrl;
     private String title;
-    private String desc;
     private int cost;
 
 }
