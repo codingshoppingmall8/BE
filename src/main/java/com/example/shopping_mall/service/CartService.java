@@ -34,7 +34,6 @@ public class CartService {
                 .member(member)
                 .imgUrl(post.getImgUrl())
                 .title(post.getTitle())
-                .desc(post.getDesc())
                 .cost(post.getCost())
                 .build();
         cartRepository.save(cart);//근데 이제 여기서 member와의 연관관계가 필요함
@@ -54,7 +53,6 @@ public class CartService {
                             .imgUrl(temp.getImgUrl())
                             .title(temp.getTitle())
                             .cost(temp.getCost())
-                            .desc(temp.getDesc())
                             .build()
             );
         }
