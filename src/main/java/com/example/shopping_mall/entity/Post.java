@@ -19,16 +19,15 @@ import java.time.LocalDateTime;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
+
+
     @Column
     private String imgUrl;
     @Column
     private String title;
     @Column
-    private String desc;
-    @Column
-    private String manual;
+    private String desc;//상품의 크기나 소재가 저장되는 필드
     @Column
     private int cost;
     @Column
@@ -46,7 +45,4 @@ public class Post {
     public void add_cnt(){
         this.cnt++;
     }
-
-
-
 }

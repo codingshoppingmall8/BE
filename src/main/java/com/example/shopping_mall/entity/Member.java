@@ -38,7 +38,7 @@ public class Member extends Timestamped {
     private String address;
 
     @Column()
-    private int phone;
+    private String phone;
 
     @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carts;

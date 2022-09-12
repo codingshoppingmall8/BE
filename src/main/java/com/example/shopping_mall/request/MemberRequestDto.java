@@ -13,7 +13,6 @@ import javax.validation.constraints.*;
 public class MemberRequestDto {
 
     @NotEmpty
-    @Email
     private String email;
 
     @NotEmpty
@@ -28,6 +27,6 @@ public class MemberRequestDto {
     @NotEmpty
     private String address;
 
-    @NotNull
-    private Integer phone;
+    @NotEmpty
+    private String phone;
 }
