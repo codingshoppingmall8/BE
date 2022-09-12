@@ -1,14 +1,12 @@
 package com.example.shopping_mall.response;
 
 
-import com.example.shopping_mall.entity.Category;
 import com.example.shopping_mall.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @NoArgsConstructor
