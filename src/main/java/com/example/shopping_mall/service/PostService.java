@@ -29,7 +29,7 @@ public class PostService {
     public ResponseDto<?> allPostSort(int page,int method) { //전체 리스트 정렬 할때 .
         Pageable pageable;
         if(method ==1){
-            pageable = PageRequest.of(page-1,30,Sort.by("cnt"));
+            pageable = PageRequest.of(page-1,30,Sort.by("cnt").descending());
         }
         else if(method ==2){
             pageable = PageRequest.of(page-1,30,Sort.by("cost"));
@@ -56,7 +56,7 @@ public class PostService {
     public ResponseDto<?> sortPostsByCategory(int page,int cate_num,int method){
         Pageable pageable;
         if(method == 1){
-            pageable = PageRequest.of(page-1,30,Sort.by("cnt"));
+            pageable = PageRequest.of(page-1,30,Sort.by("cnt").descending());
         }
         else if(method ==2){
             pageable = PageRequest.of(page-1,30,Sort.by("cost"));
@@ -82,7 +82,7 @@ public class PostService {
                 .desc(requestPostDto.getDesc())
                 .cost(requestPostDto.getCost())
                 .point(requestPostDto.getPoint())
-                .cnt(0)
+                .cnt(0)//초기 조회수는 0인것임!
                 .category(requestPostDto.getCategory())
                 .build();
         postRepository.save(post);
