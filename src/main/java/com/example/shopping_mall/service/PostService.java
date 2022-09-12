@@ -79,7 +79,6 @@ public class PostService {
                 .imgUrl(requestPostDto.getImgUrl())
                 .title(requestPostDto.getTitle())
                 .desc(requestPostDto.getDesc())
-                .manual(requestPostDto.getManual())
                 .cost(requestPostDto.getCost())
                 .point(requestPostDto.getPoint())
                 .cnt(0)
@@ -87,7 +86,6 @@ public class PostService {
                 .build();
         postRepository.save(post);
         return ResponseDto.success("Success");
-
     }
 
     @Transactional
@@ -113,8 +111,8 @@ public class PostService {
                 .category(post.getCategory())
                 .build()
         );
-
     }
+
     @Transactional(readOnly = true)
     public Post isPresentPost(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
