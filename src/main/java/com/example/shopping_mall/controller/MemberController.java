@@ -2,6 +2,8 @@ package com.example.shopping_mall.controller;
 
 import com.example.shopping_mall.request.LoginRequestDto;
 import com.example.shopping_mall.request.MemberRequestDto;
+import com.example.shopping_mall.request.MyPageRequestDto;
+import com.example.shopping_mall.response.MyPageResponseDto;
 import com.example.shopping_mall.response.ResponseDto;
 import com.example.shopping_mall.service.MemberService;
 import com.example.shopping_mall.service.KakaoLoginService;
@@ -55,8 +57,8 @@ public class MemberController {
     }
 
     @PostMapping(value = "api/member/mypage")
-    public ResponseDto<?> updateMyPage(MemberRequestDto requestDto, HttpServletRequest request){
-        return memberService.updateMyPage(requestDto, request);
+    public ResponseDto<?> updateMyPage(@RequestBody MyPageRequestDto requestDto, HttpServletRequest request){
+        return memberService.updateMyPag(requestDto, request);
     }
 
 }

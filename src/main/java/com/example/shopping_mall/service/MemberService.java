@@ -5,6 +5,7 @@ import com.example.shopping_mall.jwt.TokenProvider;
 import com.example.shopping_mall.repository.MemberRepository;
 import com.example.shopping_mall.request.LoginRequestDto;
 import com.example.shopping_mall.request.MemberRequestDto;
+import com.example.shopping_mall.request.MyPageRequestDto;
 import com.example.shopping_mall.request.TokenDto;
 import com.example.shopping_mall.response.MemberResponseDto;
 import com.example.shopping_mall.response.MyPageResponseDto;
@@ -181,7 +182,7 @@ public class MemberService {
     }
 
     @Transactional
-    public ResponseDto<?> updateMyPage(MemberRequestDto requestDto, HttpServletRequest request){
+    public ResponseDto<?> updateMyPag(MyPageRequestDto requestDto, HttpServletRequest request){
         if (null == request.getHeader("RefreshToken")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");
@@ -191,7 +192,6 @@ public class MemberService {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");
         }
-
         Member member = validateMember(request);
         if (null == member) {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
