@@ -7,6 +7,7 @@ import com.example.shopping_mall.entity.Post;
 import com.example.shopping_mall.jwt.TokenProvider;
 import com.example.shopping_mall.repository.PostRepository;
 import com.example.shopping_mall.repository.CartRepository;
+import com.example.shopping_mall.request.DeleteCartDto;
 import com.example.shopping_mall.response.ResponseCartDto;
 import com.example.shopping_mall.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,6 @@ public class CartService {
     private final CartRepository cartRepository;
     private final PostRepository postRepository;
     private final TokenProvider tokenProvider;
-
     @Transactional
     public ResponseDto<?> addCart(Long id, HttpServletRequest request) { //전체 리스트를 return// token이 있으면 그냥 member가 할당이 되는데 아니면,, 흑흑
         Post post = isPresentPost(id);//로그인되면 그냥 가능한디.
@@ -40,10 +40,8 @@ public class CartService {
                 .cost(post.getCost())
                 .build();
         cartRepository.save(cart);//근데 이제 여기서 member와의 연관관계가 필요함
-
         return ResponseDto.success("SUCCESS");
     }
-
     @Transactional
     public ResponseDto<?> getAllCart(HttpServletRequest request) {
         Member member = validateMember(request);
@@ -65,17 +63,26 @@ public class CartService {
         }
         return ResponseDto.success(responseCartDtoList);
     }
-
     @Transactional
-    public ResponseDto<?> removeCart(HttpServletRequest request,List<Integer>chbox) { //chbox에서는 제거될 cart들의 id를 지칭함
+    public ResponseDto<?> removeCart(HttpServletRequest request, DeleteCartDto deleteCartDto) { //chbox에서는 제거될 cart들의 id를 지칭함
         Member member = validateMember(request);
         if(member==null){
            return ResponseDto.fail("Login is required","로그인이 필요합니다.");
         }
-        for(Integer temp : chbox){
-            Long idx = Long.valueOf(temp);
-            cartRepository.deleteById(idx);
+        List<Long> ids =deleteCartDto.getPostId();
+        for(Long temp: ids){
+            cartRepository.deleteById(temp);
         }
+        return ResponseDto.success("SUCCESS");
+    }
+
+    @Transactional
+    public ResponseDto<?> removeAllCart(HttpServletRequest request) {
+        Member member = validateMember(request);
+        if(member==null){
+            return ResponseDto.fail("Login is required","로그인이 필요합니다.");
+        }
+        cartRepository.deleteAll();
         return ResponseDto.success("SUCCESS");
     }
     @Transactional(readOnly = true)//post를 찾아서 거기서 build를 하고 저장을 하는거임!
