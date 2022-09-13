@@ -180,6 +180,7 @@ public class MemberService {
         );
     }
 
+    @Transactional
     public ResponseDto<?> updateMyPage(MemberRequestDto requestDto, HttpServletRequest request){
         if (null == request.getHeader("RefreshToken")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
