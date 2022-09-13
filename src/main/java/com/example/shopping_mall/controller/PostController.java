@@ -41,7 +41,7 @@ public class PostController {
         return postService.deletePost(id);
     }
 
-    @GetMapping("/member/post/{id}")
+    @GetMapping("/post/{id}")
     public ResponseDto<?> getPost(@PathVariable("id") Long id){
         return postService.getPost(id);
     }
