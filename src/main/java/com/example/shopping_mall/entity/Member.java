@@ -1,6 +1,7 @@
 package com.example.shopping_mall.entity;
 
 import com.example.shopping_mall.request.MemberRequestDto;
+import com.example.shopping_mall.request.MyPageRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +47,7 @@ public class Member extends Timestamped {
     @OneToOne(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private RefreshToken refreshToken;
 
-    public void update(MemberRequestDto requestDto){
+    public void update(MyPageRequestDto requestDto){
         this.name = requestDto.getName();
         this.address = requestDto.getAddress();
         this.phone = requestDto.getPhone();
