@@ -1,6 +1,7 @@
 package com.example.shopping_mall.controller;
 
 
+import com.example.shopping_mall.request.DeleteCartDto;
 import com.example.shopping_mall.request.MemberRequestDto;
 import com.example.shopping_mall.response.ResponseDto;
 import com.example.shopping_mall.service.CartService;
@@ -25,7 +26,11 @@ public class CartController {
     }
 
     @DeleteMapping(value = "api/member/cart")
-    public ResponseDto<?> removeCarts(HttpServletRequest request,@RequestBody List<Integer>chbox) {
-        return cartService.removeCart(request,chbox);
+    public ResponseDto<?> removeCarts(HttpServletRequest request, @RequestBody DeleteCartDto deleteCartDto) {
+        return cartService.removeCart(request,deleteCartDto);
+    }
+    @DeleteMapping(value = "api/member/cart/deleteAll")
+    public ResponseDto<?> removeCarts(HttpServletRequest request) {
+        return cartService.removeAllCart(request);
     }
 }
