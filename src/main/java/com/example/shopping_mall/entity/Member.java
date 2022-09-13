@@ -44,6 +44,7 @@ public class Member extends Timestamped {
     @OneToMany(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carts;
 
+
     @OneToOne(mappedBy="member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private RefreshToken refreshToken;
 
