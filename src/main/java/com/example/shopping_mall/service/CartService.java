@@ -57,6 +57,7 @@ public class CartService {
                             .brand(temp.getBrand())
                             .imgUrl(temp.getImgUrl())
                             .title(temp.getTitle())
+                            .cnt(1)
                             .cost(temp.getCost())
                             .build()
             );
