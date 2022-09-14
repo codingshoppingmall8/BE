@@ -33,14 +33,19 @@ public class PostService {
     @Transactional
     public ResponseDto<?> allPostSort(int page, int method) { //전체 리스트 정렬 할때 .
         Pageable pageable;
-        if (method == 1) {
+
+        if (method == 0) {
+            pageable = PageRequest.of(page - 1, 30, Sort.by("createdAt").descending());
+        }
+        else if (method == 1) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cnt").descending());
         } else if (method == 2) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cost"));
         } else if (method == 3) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cost").descending());
-        } else
+        } else{
             pageable = PageRequest.of(page - 1, 30, Sort.by("title"));
+        }
         Page<Post> posts = postRepository.findAll(pageable);//전체를 그냥 조회 할 때
         Page<ResponsePostDto> responsePostDtoPage = new ResponsePostDto().toDtoList(posts);
         return ResponseDto.success(responsePostDtoPage);
@@ -59,14 +64,19 @@ public class PostService {
     @Transactional
     public ResponseDto<?> sortPostsByCategory(int page, int cate_num, int method) {
         Pageable pageable;
-        if (method == 1) {
+        if (method == 0) {
+            pageable = PageRequest.of(page - 1, 30, Sort.by("createdAt").descending());
+        }
+        else if (method == 1) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cnt").descending());
         } else if (method == 2) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cost"));
         } else if (method == 3) {
             pageable = PageRequest.of(page - 1, 30, Sort.by("cost").descending());
-        } else
+        } else{
             pageable = PageRequest.of(page - 1, 30, Sort.by("title"));
+        }
+
         Page<Post> posts;
 
         Category[] categories = Category.values();
