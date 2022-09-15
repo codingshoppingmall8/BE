@@ -23,10 +23,13 @@
 ### 김하영, 신동하, 이선홍
 ### FE🖌
 ### 윤채원, 이혜림
+<br>
+<br>
 
 ## ERD
 ![image](https://user-images.githubusercontent.com/67679972/190326599-51dfb9a8-8e60-45f8-85ea-711b7c2f26cc.png)
-
+<br>
+<br>
 
 
 
@@ -51,7 +54,8 @@
 |장바구니 전체삭제|DELETE|api/member/cart/deleteAll|
 |게시글 등록|GET|api/member/cart|
 |게시글 삭제|DELETE|api/member/cart{id}|
-
+<br>
+<br>
 
 
 
