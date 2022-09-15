@@ -24,8 +24,7 @@
 ## 📃api명세서
 |기능|메소드|URL|
 |------|---|---|
-|이메일중복체크|GET|
-api/member/signup|
+|이메일중복체크|GET|api/member/signup|
 |회원가입|POST|테스트3|
 |로그인|POST|테스트3|
 |카카오 로그인|GET|테스트3|
