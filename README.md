@@ -26,7 +26,7 @@
 <br>
 <br>
 
-## ERD
+## 💾ERD
 ![image](https://user-images.githubusercontent.com/67679972/190326599-51dfb9a8-8e60-45f8-85ea-711b7c2f26cc.png)
 <br>
 <br>
