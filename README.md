@@ -28,8 +28,10 @@
 |회원가입|POST|api/member/signup|
 |로그인|POST|api/member/login|
 |카카오 로그인|GET|api/member/kakao|
+|메인페이지 가져오기|GET|api/post?page=|
 |메인페이지 정렬|GET|api/sort_post?page= &sort_method=|
-|메인페이지 카테고리|GET|api/post?page=|
+|카테고리별로 가져오기|GET|api/post_category?page=&cate_no=|
+|카테고리별로 정렬|GET|api/post_category?page=&cate_n&sort_method=|
 |상세페이지 가져오기|GET|api/post/{id}|
 |마이페이지 가져오기|GET|api/member/mypage|
 |마이페이지 수정|POST|api/member/mypage|
@@ -37,6 +39,8 @@
 |장바구니 조회|GET|api/member/cart|
 |장바구니 삭제|DELETE|api/member/cart|
 |장바구니 전체삭제|DELETE|api/member/cart/deleteAll|
+|게시글 등록|GET|api/member/cart|
+|게시글 삭제|DELETE|api/member/cart{id}|
 
 
 
