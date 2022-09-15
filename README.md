@@ -1,6 +1,6 @@
 # 쇼핑몰 클론 코딩
 ![image](https://user-images.githubusercontent.com/67679972/190193713-21dabc0c-48f0-4b0b-82da-73e842f29a94.png)
-[클론한 사이트 주소](https://onemorebag.kr/product/list.html?cate_no=45)
+[클론한 사이트 주소](http://hyerimawsbucket.s3-website.ap-northeast-2.amazonaws.com/)
 
 <br>
 <br>
